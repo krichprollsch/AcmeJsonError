@@ -1,3 +1,5 @@
+parameters:
+    json_error_formatter.path: '/api/v1'
 services:
     twig.exception_listener:
         class: Symfony\Component\HttpKernel\EventListener\ExceptionListener
@@ -7,3 +9,7 @@ services:
         tags:
             - {name: kernel.event_subscriber}
             - {name: monolog.logger, channel: request}
+    json_error_formatter:
+        class: Acme\JsonErrorBundle\Formatter\JsonApi
+        arguments:
+            - '%json_error_formatter.path%'
